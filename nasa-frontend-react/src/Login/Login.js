@@ -20,7 +20,7 @@ class Login extends React.Component {
     });
   }
 
-  render(props) {
+  render() {
     return (
       <div>
         <NavItem>
@@ -30,10 +30,10 @@ class Login extends React.Component {
           toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>
-            <Form inline onSubmit={this.props.Login}>
+            <Form onSubmit={this.props.handleSubmit} inline>
               <FormGroup>
                 <Label for="exampleEmail" hidden>Email</Label>
-                <Input type="email" name="email" id="exampleEmail" onChange={this.props.handleChange} placeholder="Email (username)" />
+                <Input type="email" name="username" id="exampleEmail" onChange={this.props.handleChange} placeholder="Email (username)" />
               </FormGroup>
               {' '}
               <FormGroup>
@@ -41,13 +41,9 @@ class Login extends React.Component {
                 <Input type="password" name="password" id="examplePassword" onChange={this.props.handleChange} placeholder="Password" />
               </FormGroup>
               {' '}
-              <Button>Login</Button>
+              <Button onClick={this.toggle}>Login</Button>
             </Form>
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
         </Modal>
       </div>
     );

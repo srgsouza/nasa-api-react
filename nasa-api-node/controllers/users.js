@@ -102,14 +102,39 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// Login user - using Passport JS
+// // Login user - using Passport JS
+// router.post('/login', (req, res, next) => {
+//   // passport.authenticate returns a callback function
+//   // appended: '(res, req, next)' to the function listed on the Passport Docs
+//   console.log('/users/login route was called');
+  
+//   passport.authenticate('local', {
+//     successRedirect: '/',
+//     failureRedirect: '/users/login'
+//   }) (req, res, next);
+// })
+
 router.post('/login', (req, res, next) => {
-  // passport.authenticate returns a callback function
-  // appended: '(res, req, next)' to the function listed on the Passport Docs
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/users/login'
-  }) (req, res, next);
+  passport.authenticate('local', function (err, user, info) {
+    if (err) { 
+      // return next(err); 
+      return res.status(500).json({ success: false, message: 'Internal server error: ' + err.message });
+    }
+    if (!user) { 
+      return res.redirect('/login'); 
+    }
+    req.logIn(user, function (err) {
+      if (err) { 
+        return next(err); 
+      }
+      // return res.redirect('/users/' + user.username);
+      // return res.status(200).json({ success: true, data: 'authentication succeeded' });
+      return res.json({
+        status: 200,
+        data: 'login successful'
+      });
+    });
+  })(req, res, next);
 })
 
 // Register new user - Insert new item in the DB

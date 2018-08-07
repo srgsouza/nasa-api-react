@@ -40,9 +40,8 @@ export default class NavbarComponent extends React.Component {
                             </NavItem>
                             <Login 
                             username={this.props.username} 
-                            login={this.props.login} 
-                            handleSubmit={this.handleSubmit}
-                            handleChange={this.handleChange}
+                            handleSubmit={this.props.handleSubmit}
+                            handleChange={this.props.handleChange}
                             />
                         </Nav>
                     </Collapse>
