@@ -5,6 +5,7 @@ const request = require('request'); // makes http / https calls
 const bcrypt = require('bcryptjs'); // encrypts passwords by hashing
 const session = require('express-session'); // allow storage of individual pieces of information while in session
 const passport = require('passport');
+const cors = require('cors');
 
 require('dotenv').config();
 require('./db/db');   // runs the db.js file
@@ -40,10 +41,20 @@ app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
+
+// CORS - Allows communication between servers - ie. React server
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
+
 // require the controller(s)
 const usersController = require('./controllers/users');
 
-app.use('/users', usersController);
+// app.use('/users', usersController);
+app.use('/api/v1/users', usersController);
 
 app.get('/', (req, res) => {
 	res.render('index.ejs');

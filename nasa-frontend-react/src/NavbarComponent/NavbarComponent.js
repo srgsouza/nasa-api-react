@@ -14,19 +14,17 @@ import Login from '../Login/Login';
 export default class NavbarComponent extends React.Component {
     constructor(props) {
         super(props);
-
-        this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
         };
     }
-    toggle() {
+    // handles the on/off for the navbar toggler
+    toggle = () => {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
-
-    render() {
+    render(props) {
         return (
             <div>
                 <Navbar color="light" light expand="md">
@@ -40,7 +38,12 @@ export default class NavbarComponent extends React.Component {
                             <NavItem>
                                 <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
                             </NavItem>
-                            <Login />
+                            <Login 
+                            username={this.props.username} 
+                            login={this.props.login} 
+                            handleSubmit={this.handleSubmit}
+                            handleChange={this.handleChange}
+                            />
                         </Nav>
                     </Collapse>
                 </Navbar>

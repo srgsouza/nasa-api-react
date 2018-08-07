@@ -34,7 +34,11 @@ router.get('/new', (req, res) => {
 
 // Render the login page
 router.get('/login', function (req, res) {
-  res.render('users/login.ejs')
+  res.json({
+    status: 200,
+    data: 'login successful'
+  });
+  // res.render('users/login.ejs');
 });
 
 // logout

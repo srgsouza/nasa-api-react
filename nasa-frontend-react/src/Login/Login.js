@@ -20,7 +20,7 @@ class Login extends React.Component {
     });
   }
 
-  render() {
+  render(props) {
     return (
       <div>
         <NavItem>
@@ -30,15 +30,15 @@ class Login extends React.Component {
           toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>
-            <Form inline>
+            <Form inline onSubmit={this.props.Login}>
               <FormGroup>
                 <Label for="exampleEmail" hidden>Email</Label>
-                <Input type="email" name="email" id="exampleEmail" placeholder="Email (username)" />
+                <Input type="email" name="email" id="exampleEmail" onChange={this.props.handleChange} placeholder="Email (username)" />
               </FormGroup>
               {' '}
               <FormGroup>
                 <Label for="examplePassword" hidden>Password</Label>
-                <Input type="password" name="password" id="examplePassword" placeholder="Password" />
+                <Input type="password" name="password" id="examplePassword" onChange={this.props.handleChange} placeholder="Password" />
               </FormGroup>
               {' '}
               <Button>Login</Button>
