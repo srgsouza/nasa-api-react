@@ -33,13 +33,13 @@ router.get('/new', (req, res) => {
 });
 
 // Render the login page
-router.get('/login', function (req, res) {
-  res.json({
-    status: 200,
-    data: 'login successful'
-  });
-  // res.render('users/login.ejs');
-});
+// router.get('/login', function (req, res) {
+//   res.json({
+//     status: 200,
+//     data: 'login successful'
+//   });
+//   // res.render('users/login.ejs');
+// });
 
 // logout
 router.get('/logout', function (req, res) {
@@ -101,8 +101,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-// // Login user - using Passport JS
+// // Login user - using Passport JS for local consumption (ie ejs)
 // router.post('/login', (req, res, next) => {
 //   // passport.authenticate returns a callback function
 //   // appended: '(res, req, next)' to the function listed on the Passport Docs
@@ -121,14 +120,12 @@ router.post('/login', (req, res, next) => {
       return res.status(500).json({ success: false, message: 'Internal server error: ' + err.message });
     }
     if (!user) { 
-      return res.redirect('/login'); 
+      // return res.redirect('/login'); 
     }
     req.logIn(user, function (err) {
       if (err) { 
         return next(err); 
       }
-      // return res.redirect('/users/' + user.username);
-      // return res.status(200).json({ success: true, data: 'authentication succeeded' });
       return res.json({
         status: 200,
         data: 'login successful'

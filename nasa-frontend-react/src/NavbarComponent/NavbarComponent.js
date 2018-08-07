@@ -8,7 +8,6 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
-import LoginModal from '../LoginModal/LoginModal';
 import Login from '../Login/Login';
 
 export default class NavbarComponent extends React.Component {

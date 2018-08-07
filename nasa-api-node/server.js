@@ -52,9 +52,11 @@ app.use(cors(corsOptions));
 
 // require the controller(s)
 const usersController = require('./controllers/users');
+const spacePicturesController = require('./controllers/spacePictures');
 
 // app.use('/users', usersController);
 app.use('/api/v1/users', usersController);
+app.use('/api/v1/pictures', spacePicturesController);
 
 app.get('/', (req, res) => {
 	res.render('index.ejs');

@@ -19,19 +19,6 @@ class App extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.login(this.state.username, this.state.password);
-  // }
-
-  // login = (username, password) => {
-  //   // the last thing that you want to do in your function
-  //   this.setState({
-  //     username: username,
-  //     password: password,
-  //     logged: true
-  //   });
-  // }
   handleSubmit = async (e) => {
     e.preventDefault();
     const loginResponse = await fetch('http://localhost:9000/api/v1/users/login', {
@@ -43,24 +30,36 @@ class App extends Component {
     });
 
     const parsedResponse = await loginResponse.json();
+    console.log(parsedResponse);
+    
 
     if (parsedResponse.data === 'login successful') {
-      this.props.history.push('/movies');
+      // this.props.history.push('/movies');
+      this.setState({ logged: true })
     }
 
   }
 
   render() {
     return (
-      <div className="App">
-        <NavbarComponent 
-        username={this.state.username} 
-        handleSubmit={this.handleSubmit} 
-        handleChange={this.handleChange}
+      <main className="App">
+        <NavbarComponent
+          username={this.state.username}
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
         />
-        Username is: {this.state.username}
-      </div>
-    );
+        Logged ? : {this.state.logged}
+      </main>
+    )
+    // return (
+    //   <div className="App">
+    //     <NavbarComponent 
+    //     username={this.state.username} 
+    //     handleSubmit={this.handleSubmit} 
+    //     handleChange={this.handleChange}
+    //     />
+    //   </div>
+    // );
   }
 }
 
