@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
     minlength: 6
   },
   displayname: String,
-  trails: [{type:Schema.Types.ObjectId, ref: 'Trail'}],
-  bikes: [{ type: Schema.Types.ObjectId, ref: 'Bike' }]
+  // Bellow is an example of reference ID in Mongo DB. use to link two models. Then use .populate('trails') (see controller)
+  // trails: [{type:Schema.Types.ObjectId, ref: 'Trail'}],
 });
 
 UserSchema.methods.validPassword = async function (password) {

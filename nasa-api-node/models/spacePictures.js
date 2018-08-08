@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const SpacePictureSchema = new Schema({
   imageUrl: String,
   title: String,
-  explanation: String
+  explanation: String,
+  comment: String
 })
 
 const SpacePicture = mongoose.model('SpacePicture', SpacePictureSchema);

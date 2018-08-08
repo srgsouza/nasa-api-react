@@ -8,81 +8,40 @@ const User  = require('../models/users');
 
 // display the index page - show all users
 router.get('/', async (req, res) => {
-  let username = null;
-  if (req.user !== undefined) {
-    username = req.user.username;
-  }
-  // console.log(session);
-
   try {
     // const data = await User.find({}).populate('trails').populate('bikes');
     const data = await User.find({});
-
-    res.render('users/index.ejs', {
-      "usersList": data,
-      username: username
+    res.json({
+      data: data,
     });
   } catch (error) {
     console.log(error);
   }
 });
 
-// create new - Shows the Form
-router.get('/new', (req, res) => {
-  res.render('users/new.ejs');
-});
-
-// Render the login page
-// router.get('/login', function (req, res) {
-//   res.json({
-//     status: 200,
-//     data: 'login successful'
-//   });
-//   // res.render('users/login.ejs');
-// });
-
 // logout
 router.get('/logout', function (req, res) {
   req.logout();
-  res.redirect('/');
+  res.json({
+    status: 200
+  })
 });
 
-router.get('/logged', (req, res) => {
-  if (!req.user) {
-    res.redirect('/users')
-  }
-  res.send(`Logged in user is ${req.user.username}`);
-})
+// router.get('/logged', (req, res) => {
+//   if (!req.user) {
+//     res.redirect('/users')
+//   }
+//   res.send(`Logged in user is ${req.user.username}`);
+// })
 
 // render the edit page (pre-filled with existing data)
 router.get('/:id/edit', async (req, res) => {
   try {
     const data = await User.findById(req.params.id);
-    res.render('users/edit.ejs', {
-      user: data,
+    res.json({
+      data: data,
       id: req.params.id
     })
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// Render user profile TODO
-router.get('/:id/profile', async (req, res) => {
-  let username = null;
-  if (req.user !== undefined) {
-    username = req.user.username;
-  }
-  // console.log(session);
-  try {
-    // const data = await User.findById(req.params.id).populate('trails').populate('bikes');
-    const data = await User.findById(req.params.id);
-    console.log(data);
-
-    res.render('users/profile.ejs', {
-      "usersList": data,
-      username: username
-    });
   } catch (error) {
     console.log(error);
   }
@@ -92,26 +51,14 @@ router.get('/:id/profile', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const data = await User.findById(req.params.id);
-    res.render('users/show.ejs', {
+    res.render({
       user: data,
-      index: req.params.id
+      id: req.params.id
     })
   } catch (error) {
     console.log(error);
   }
 });
-
-// // Login user - using Passport JS for local consumption (ie ejs)
-// router.post('/login', (req, res, next) => {
-//   // passport.authenticate returns a callback function
-//   // appended: '(res, req, next)' to the function listed on the Passport Docs
-//   console.log('/users/login route was called');
-  
-//   passport.authenticate('local', {
-//     successRedirect: '/',
-//     failureRedirect: '/users/login'
-//   }) (req, res, next);
-// })
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', function (err, user, info) {
@@ -138,7 +85,9 @@ router.post('/login', (req, res, next) => {
 router.post('/register', async (req, res) => {
   try {
     await User.create(req.body);
-    res.redirect('/users');
+    res.json({
+      status: 200
+    })
   } catch (error) {
     console.log(error);
   }
@@ -149,7 +98,9 @@ router.put('/:id', async (req, res) => {
   // req.body is the updated form info
   try {
     await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.redirect('/users');
+    res.json({
+      status: 200
+    });
   } catch (error) {
     console.log(error);
   }
@@ -159,7 +110,9 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     await User.findByIdAndRemove(req.params.id);
-    res.redirect('/users');
+    res.json({
+      status: 200
+    });
   } catch (error) {
     console.log(error);
   }
