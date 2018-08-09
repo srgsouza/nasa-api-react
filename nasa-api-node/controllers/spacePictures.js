@@ -43,12 +43,12 @@ router.get('/:id', async (req, res) => {
 });
 
 // route to add item 
-router.post('/new', async (req, res) => {
-  console.log(req.body)
+router.post('/', async (req, res) => {
   try {
-    await SpacePicture.create(req.body);
+    const data = await SpacePicture.create(req.body);
     res.json({
-      status: 200
+      status: 200, 
+      data: data,
     });
   } catch (error) {
     return next(err);
@@ -58,8 +58,9 @@ router.post('/new', async (req, res) => {
 // route to update an item 
 router.put('/:id', async (req, res) => {
   // req.body is the updated form info
+  console.log(JSON.stringify(req));
   try {
-    await SpacePicture.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    // await SpacePicture.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json({
       status: 200
     })
