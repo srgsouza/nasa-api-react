@@ -44,6 +44,7 @@ router.get('/:id', async (req, res) => {
 
 // route to add item 
 router.post('/new', async (req, res) => {
+  console.log(req.body)
   try {
     await SpacePicture.create(req.body);
     res.json({

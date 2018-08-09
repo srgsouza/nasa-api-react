@@ -1,4 +1,3 @@
-
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
 import React from 'react';
@@ -26,7 +25,7 @@ class Login extends React.Component {
         <NavItem>
           <Button color="link" onClick={this.toggle}>Login</Button>
         </NavItem>
-        <Modal isOpen={this.state.modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}
+        <Modal isOpen={this.state.modal} modalTransition={{ timeout: 400 }} backdropTransition={{ timeout: 700 }}
           toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>

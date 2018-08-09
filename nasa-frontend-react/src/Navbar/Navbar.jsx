@@ -8,7 +8,9 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
-import Login from '../Login/Login';
+import Login from '../Login';
+// import Logout from '../Logout';
+import Register from '../Register'
 
 export default class NavbarComponent extends React.Component {
     constructor(props) {
@@ -31,17 +33,12 @@ export default class NavbarComponent extends React.Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                            </NavItem>
                             <Login 
                             username={this.props.username} 
                             handleSubmit={this.props.handleSubmit}
                             handleChange={this.props.handleChange}
                             />
+                            <Register />
                         </Nav>
                     </Collapse>
                 </Navbar>

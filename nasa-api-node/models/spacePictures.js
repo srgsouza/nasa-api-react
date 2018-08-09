@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const SpacePictureSchema = new Schema({
-  imageUrl: String,
+  url: String,
   title: String,
   explanation: String,
+  date: String,
   comment: String
 })
 

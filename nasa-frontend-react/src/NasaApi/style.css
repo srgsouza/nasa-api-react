@@ -1,0 +1,27 @@
+.POD {
+    width: 80%;
+    height: 80%;
+}
+
+.POD-h1 {
+    font-family: 'Orbitron', sans-serif;
+    
+}
+
+.POD-h3 {
+    font-family: 'Orbitron', sans-serif;
+}
+.row {  
+    display: flex;
+    flex-wrap: wrap;
+}
+.side {
+    flex: 30%;
+    /* background-color: #1f1d24; */
+    padding: 20px;
+}
+.main {
+    flex: 70%;
+    /* background-color: rgb(59, 47, 66); */
+    padding: 20px;
+}

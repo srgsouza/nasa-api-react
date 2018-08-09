@@ -73,7 +73,7 @@ router.post('/login', (req, res, next) => {
       if (err) { 
         return next(err); 
       }
-      return res.json({
+      return res.login().res.json({
         status: 200,
         data: 'login successful'
       });
